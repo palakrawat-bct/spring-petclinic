@@ -1,5 +1,7 @@
 name: Leaked Secrets Scan
-on: 
+on:
+  push:
+    branches: [ main ]
 jobs:
   TruffleHog:
     runs-on: ubuntu-latest
@@ -11,7 +13,7 @@ jobs:
       - name: TruffleHog OSS
         uses: trufflesecurity/trufflehog@main
         with:
-          path: ../
+          path: ./
           base: ${{ github.event.repository.default_branch }}
           head: HEAD
-          extra_args: --debug --only-verified
+          extra_args: --debug 
