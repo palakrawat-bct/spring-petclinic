@@ -17,4 +17,4 @@ jobs:
         uses: trufflesecurity/trufflehog@v3.28.0
       - name: Scan for Secrets
         run: |
-          trufflehog github --repo https://github.com/palakrawat-bct/spring-petclinic.git
+          trufflehog github https://github.com/palakrawat-bct/spring-petclinic.git
