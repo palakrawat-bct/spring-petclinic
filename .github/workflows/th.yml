@@ -1,18 +1,21 @@
-name: TruffleHog Scan
+name: Trufflehog Scan
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
-  trufflehog:
+  trufflehog-scan:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: TruffleHog Scan
-        uses: adrian-gheorghe/trufflehog-github-action@v2
-        with:
-          repo-path: "."
-          sensitive-string-file-path: "sensitive-strings.txt"
+      - name: Install Trufflehog
+        run: |
+          pip install trufflehog
+      - name: TruffleHog OSS
+        uses: trufflesecurity/trufflehog@v3.28.0
+      - name: Scan for Secrets
+        run: |
+          trufflehog --entropy-threshold 3 --regex --max-depth 6 .
 
