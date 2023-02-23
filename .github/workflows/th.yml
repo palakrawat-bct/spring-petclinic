@@ -15,4 +15,4 @@ jobs:
           pip install trufflehog
       - name: Scan for Secrets
         run: |
-          trufflehog -h
+          trufflehog --branch main
