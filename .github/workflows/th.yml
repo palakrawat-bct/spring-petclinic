@@ -1,20 +1,17 @@
-name: Trufflehog Scan
-
-on:
-  push:
-    branches: [main]
-
+name: Leaked Secrets Scan
+on: [pull_request]
 jobs:
-  trufflehog-scan:
+  TruffleHog:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Install Trufflehog
-        run: |
-          pip install trufflehog
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - name: TruffleHog OSS
-        uses: trufflesecurity/trufflehog@v3.28.0
-      - name: Scan for Secrets
-        run: |
-          trufflehog --regex --entropy=False .
+        uses: trufflesecurity/trufflehog@main
+        with:
+          path: ./
+          base: ${{ github.event.repository.default_branch }}
+          head: HEAD
+          extra_args: --debug --only-verified
