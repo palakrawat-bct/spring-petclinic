@@ -17,4 +17,4 @@ jobs:
         uses: trufflesecurity/trufflehog@v3.28.0
       - name: Scan for Secrets
         run: |
-          trufflehog git --trace
+          trufflehog --regex --entropy=False .
