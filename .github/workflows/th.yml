@@ -17,5 +17,5 @@ jobs:
         uses: trufflesecurity/trufflehog@v3.28.0
       - name: Scan for Secrets
         run: |
-          trufflehog --entropy-threshold 3 --regex --max-depth 6 .
+          trufflehog git https://github.com/palakrawat-bct/spring-petclinic.git --only-verified
 
