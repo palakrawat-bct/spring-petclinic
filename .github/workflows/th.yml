@@ -15,4 +15,4 @@ jobs:
           pip install trufflehog
       - name: Scan for Secrets
         run: |
-          trufflehog --entropy-threshold 3 --regex --max-depth 6 .
+          trufflehog github --org=trufflesecurity --only-verified
