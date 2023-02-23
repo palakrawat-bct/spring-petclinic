@@ -1,18 +1,18 @@
-name: Trufflehog Scan
+name: TruffleHog Scan
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
 
 jobs:
-  trufflehog-scan:
+  trufflehog:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
-      - name: TruffleHog OSS
-        uses: trufflesecurity/trufflehog@v3.28.0
+        uses: actions/checkout@v2
+      - name: TruffleHog Scan
+        uses: adrian-gheorghe/trufflehog-github-action@v2
+        with:
+          repo-path: "."
+          sensitive-string-file-path: "sensitive-strings.txt"
 
-      - name: Scan for Secrets
-        run: |
-          trufflehog git https://github.com/trufflesecurity/test_keys --only-verified
