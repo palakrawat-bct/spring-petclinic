@@ -1,0 +1,27 @@
+name: TruffleHog
+
+on: [pull_request]
+
+jobs:
+  trufflehog:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Scan for secrets
+      uses: docker://trufflesecurity/trufflehog:latest
+      with:
+        entrypoint: /bin/sh
+        args:
+          - -c
+          - |
+            trufflehog github --org=trufflesecurity
+          - ' > results.txt'
+        working-directory: /pwd
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Upload results
+      uses: actions/upload-artifact@v2
+      with:
+        name: trufflehog-results
+        path: results.txt
