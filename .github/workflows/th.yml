@@ -17,5 +17,5 @@ jobs:
         uses: trufflesecurity/trufflehog@v3.28.0
       - name: Scan for Secrets
         run: |
-          trufflehog git https://github.com/palakrawat-bct/spring-petclinic.git --only-verified
+          trufflehog git https://github.com/palakrawat-bct/spring-petclinic.git 
 
